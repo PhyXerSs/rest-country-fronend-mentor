@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { getBorderCountries } from '../pages/api/webAPI';
 
-function CountryDetail({country,handleClickCountry}) {
+function CountryDetail({country,handleClickCountry , isDarkMode}) {
   
     const [ borderCountriesList , setBorderCountriesList ] = useState([])
 
@@ -59,8 +59,8 @@ function CountryDetail({country,handleClickCountry}) {
     },[country])
 
     return (
-        <div className='w-full max-w-[1440px] px-20 flex flex-col'>
-            <div className="w-[120px] mt-10 flex justify-center items-center gap-2 py-3 pl-3 pr-4 rounded-md shadow-md cursor-pointer bg-white"
+        <div className='w-full max-w-[1440px] px-5 sm:px-20 flex flex-col'>
+            <div className={`w-[120px] mt-10 flex justify-center items-center gap-2 py-3 pl-3 pr-4 rounded-md shadow-md cursor-pointer ${isDarkMode ? 'bg-[#2b3743]': 'bg-white'}`}
                 onClick={()=>handleClickCountry({})}
             >
                 <div className="w-[18px] h-[18px]">
@@ -68,29 +68,29 @@ function CountryDetail({country,handleClickCountry}) {
                 </div>
                 <p>Back</p>
             </div>
-            <div className={`w-full flex gap-28 items-center pt-20`}>
+            <div className={`w-full flex flex-col lgg:flex-row gap-6 lgg:gap-28 items-start ssm:items-center pt-10 md:pt-20`}>
                 <img className={`w-[600px]`} src={country.flagPicture} alt=""/>
                 <div className="flex flex-col">
-                    <h2 className={`text-[24px] font-bold py-6`}>{country.commonName}</h2>
-                    <div className="flex items-start gap-20">
+                    <h2 className={`text-[28px] md:text-[40px] font-bold py-6`}>{country.commonName}</h2>
+                    <div className="flex items-start gap-5 ssm:gap-20 flex-col ssm:flex-row">
                         <div className="flex flex-col gap-2">
-                            <p className="text-[14px] gap-1"><span className="font-semibold">Native Name: </span>{country.nativeName}</p>
-                            <p className="text-[14px] gap-1"><span className="font-semibold">Population: </span>{country.population}</p>
-                            <p className="text-[14px] gap-1"><span className="font-semibold">Region: </span>{country.region}</p>
-                            <p className="text-[14px] gap-1"><span className="font-semibold">Sub Region:</span>{country.subregion}</p>
-                            <p className="text-[14px] gap-1"><span className="font-semibold">Capital: </span>{country.capital ? country.capital.join(',') : ''}</p>
+                            <p className="text-[14px]"><span className="font-semibold mr-[4px]">Native Name: </span>{country.nativeName}</p>
+                            <p className="text-[14px]"><span className="font-semibold mr-[4px]">Population: </span>{country.population}</p>
+                            <p className="text-[14px]"><span className="font-semibold mr-[4px]">Region: </span>{country.region}</p>
+                            <p className="text-[14px]"><span className="font-semibold mr-[4px]">Sub Region:</span>{country.subregion}</p>
+                            <p className="text-[14px]"><span className="font-semibold mr-[4px]">Capital: </span>{country.capital ? country.capital.join(',') : ''}</p>
                         </div>
                         <div className="flex flex-col gap-2">
-                            <p className="text-[14px] gap-1"><span className="font-semibold">Top Level Domain: </span>{country.topLevelDomain ? country.topLevelDomain.join(',') : ''}</p>
-                            <p className="text-[14px] gap-1"><span className="font-semibold">Currencies: </span>{country.currencies ? country.currencies.join(',') : ''}</p>
-                            <p className="text-[14px] gap-1"><span className="font-semibold">Languages: </span>{country.languages ? country.languages.join(',') : ''}</p>
+                            <p className="text-[14px]"><span className="font-semibold mr-[4px]">Top Level Domain: </span>{country.topLevelDomain ? country.topLevelDomain.join(',') : ''}</p>
+                            <p className="text-[14px]"><span className="font-semibold mr-[4px]">Currencies: </span>{country.currencies ? country.currencies.join(',') : ''}</p>
+                            <p className="text-[14px]"><span className="font-semibold mr-[4px]">Languages: </span>{country.languages ? country.languages.join(',') : ''}</p>
                         </div>
                     </div>
-                    <div className={`flex items-center gap-2 pt-[60px]`}>
-                        <p className="text-[14px] font-semibold">Border Countries:</p>
-                        <div className={`flex items-center gap-2 flex-wrap w-[400px]`}>
+                    <div className={`flex items-center gap-0 pt-[20px] lgg:pt-[60px] pb-[50px] sm:pb-0`}>
+                        <p className="text-[14px] font-semibold w-[180px]">Border Countries:</p>
+                        <div className={`flex items-center gap-2 flex-wrap w-full lgg:w-full`}>
                             {borderCountriesList.map((country, index)=>(
-                                <div key={`borderCountry${index}`} className="py-1 px-4 rounded-sm bg-white text-[14px] w-[80px] flex justify-center items-center overflow-hidden text-gray-600 font-[500] cursor-pointer"
+                                <div key={`borderCountry${index}`} className={`py-1 px-4 rounded-sm text-[14px] w-[80px] flex justify-center items-center overflow-hidden  font-[500] cursor-pointer ${isDarkMode ? 'bg-[#2b3743] text-white': 'bg-white text-gray-600'}`}
                                     style={{boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px'}}
                                     onClick={()=>{handleClickCountry(country)}}
                                 >{country.commonName}</div>

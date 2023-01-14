@@ -1,8 +1,8 @@
 import React from 'react'
 
-function CountryCard({country , handleClickCountry}) {
+function CountryCard({country , handleClickCountry , isDarkMode}) {
   return (
-    <div className="w-[260px] flex flex-col items-start justify-start rounded-lg shadow-md cursor-pointer hover:scale-105 duration-500 bg-white"
+    <div className={`w-[260px] flex flex-col items-start justify-start rounded-lg shadow-md cursor-pointer hover:scale-105 duration-500 ${isDarkMode ? 'bg-[#2b3743]': 'bg-white'}`}
         onClick={()=>handleClickCountry(country)}
     >
         <img className="w-full h-[150px] object-cover rounded-t-lg" src={country.flagPicture} alt="" />
